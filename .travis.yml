@@ -1,0 +1,22 @@
+language: c++
+compiler: g++
+sudo: required
+
+services:
+        - docker
+branches:
+        only:
+                - master
+
+addons:
+        apt:
+                sources:
+                        - ubuntu-toolchain-r-test
+                packages:
+                        - g++ -6
+                        - cmake
+
+script:
+        - docker build -t back .
+after_success:
+        - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
